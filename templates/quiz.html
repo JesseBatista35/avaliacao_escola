@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questionário</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <style>
+      .pergunta-block {
+        margin-bottom: 20px;
+      }
+
+      .pergunta-block p {
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .radio-column {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-left: 12px;
+      }
+
+      .radio-column label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header container">
+      <div class="brand">
+        <div class="logo">EBD</div>
+        <div>
+          <div class="h1">Avaliação de Professores</div>
+          <div class="small">Selecione a classe e responda o quiz</div>
+        </div>
+      </div>
+      <div class="nav">
+        <a class="badge" href="{{ url_for('welcome') }}">← Voltar</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <form method="get" action="{{ url_for('quiz') }}">
+          <label>Selecione sua classe:</label>
+          <select
+            name="classe"
+            onchange="if(this.value) this.form.submit();"
+            required
+          >
+            <option value="">-- Selecione --</option>
+            <option value="Jovens" {% if classe=='Jovens' %}selected{% endif %}>
+              Jovens
+            </option>
+            <option value="Adolescentes" {% if classe=='Adolescentes' %}selected{% endif %}>
+              Adolescentes
+            </option>
+          </select>
+        </form>
+      </div>
+
+      {% if professores %}
+      <form method="post" class="card" style="margin-top: 20px;">
+        <label>Seu nome:</label>
+        <input
+          type="text"
+          name="aluno_nome"
+          placeholder="Digite seu nome"
+          required
+        />
+        <input type="hidden" name="classe" value="{{ classe }}" />
+
+        {% for prof in professores %}
+        <div class="quiz-card">
+          <h3>Professor: {{ prof.nome }}</h3>
+
+          <div class="pergunta-block">
+            <p>1. O professor explica o conteúdo de forma fácil?</p>
+            <div class="radio-column">
+              <label><input type="radio" name="pergunta1_{{ prof.id }}" value="5" required> Sim</label>
+              <label><input type="radio" name="pergunta1_{{ prof.id }}" value="1"> Não</label>
+            </div>
+          </div>
+
+          <div class="pergunta-block">
+            <p>2. O professor usa exemplos práticos e bíblicos?</p>
+            <div class="radio-column">
+              <label><input type="radio" name="pergunta2_{{ prof.id }}" value="5" required> Sim</label>
+              <label><input type="radio" name="pergunta2_{{ prof.id }}" value="1"> Não</label>
+            </div>
+          </div>
+
+          <div class="pergunta-block">
+            <p>3. O professor incentiva a leitura da Bíblia?</p>
+            <div class="radio-column">
+              <label><input type="radio" name="pergunta3_{{ prof.id }}" value="5" required> Sim</label>
+              <label><input type="radio" name="pergunta3_{{ prof.id }}" value="1"> Não</label>
+            </div>
+          </div>
+
+         <div class="pergunta-block">
+  <p>4. Como você avalia a clareza do professor ao ensinar?</p>
+  <div class="radio-column">
+    <label><input type="radio" name="pergunta4_{{ prof.id }}" value="1" required> <span class="emoji">1 😡 Péssimo</span></label>
+    <label><input type="radio" name="pergunta4_{{ prof.id }}" value="2"> <span class="emoji">2 😞 Ruim</span></label>
+    <label><input type="radio" name="pergunta4_{{ prof.id }}" value="3"> <span class="emoji">3 😐 Regular</span></label>
+    <label><input type="radio" name="pergunta4_{{ prof.id }}" value="4"> <span class="emoji">4 🙂 Bom</span></label>
+    <label><input type="radio" name="pergunta4_{{ prof.id }}" value="5"> <span class="emoji">5 😍 Ótimo</span></label>
+  </div>
+</div>
+
+
+          <div class="pergunta-block">
+            <p>5. Como você avalia o conhecimento bíblico do professor?</p>
+            <div class="radio-column">
+             <label><input type="radio" name="pergunta5_{{ prof.id }}" value="1" required> <span class="emoji">1 😡 Péssimo</span></label>
+    <label><input type="radio" name="pergunta5_{{ prof.id }}" value="2"> <span class="emoji">2 😞 Ruim</span></label>
+    <label><input type="radio" name="pergunta5_{{ prof.id }}" value="3"> <span class="emoji">3 😐 Regular</span></label>
+    <label><input type="radio" name="pergunta5_{{ prof.id }}" value="4"> <span class="emoji">4 🙂 Bom</span></label>
+    <label><input type="radio" name="pergunta5_{{ prof.id }}" value="5"> <span class="emoji">5 😍 Ótimo</span></label>
+            </div>
+          </div>
+
+          <div class="pergunta-block">
+            <p>6. Como você avalia a participação da turma incentivada pelo professor?</p>
+            <div class="radio-column">
+             <label><input type="radio" name="pergunta6_{{ prof.id }}" value="1" required> <span class="emoji">1 😡 Péssimo</span></label>
+    <label><input type="radio" name="pergunta6_{{ prof.id }}" value="2"> <span class="emoji">2 😞 Ruim</span></label>
+    <label><input type="radio" name="pergunta6_{{ prof.id }}" value="3"> <span class="emoji">3 😐 Regular</span></label>
+    <label><input type="radio" name="pergunta6_{{ prof.id }}" value="4"> <span class="emoji">4 🙂 Bom</span></label>
+    <label><input type="radio" name="pergunta6_{{ prof.id }}" value="5"> <span class="emoji">5 😍 Ótimo</span></label>
+            </div>
+          </div>
+
+          <div class="pergunta-block">
+            <p>7. O conteúdo da lição é relevante e interessante?</p>
+            <div class="radio-column">
+              <label><input type="radio" name="pergunta7_{{ prof.id }}" value="1" required> <span class="emoji">1 😡 Péssimo</span></label>
+    <label><input type="radio" name="pergunta7_{{ prof.id }}" value="2"> <span class="emoji">2 😞 Ruim</span></label>
+    <label><input type="radio" name="pergunta7_{{ prof.id }}" value="3"> <span class="emoji">3 😐 Regular</span></label>
+    <label><input type="radio" name="pergunta7_{{ prof.id }}" value="4"> <span class="emoji">4 🙂 Bom</span></label>
+    <label><input type="radio" name="pergunta7_{{ prof.id }}" value="5"> <span class="emoji">5 😍 Ótimo</span></label>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <label>Comentários ou sugestões para EBD (opcional):</label>
+        <textarea name="sugestao" placeholder="Deixe sua sugestão"></textarea>
+
+        <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
+      </form>
+      {% endif %}
+    </div>
+  </body>
+</html>

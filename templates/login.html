@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Admin</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+     <!-- Botão de voltar -->
+    <div style="margin: 20px 0; text-align: right">
+      <a href="{{ url_for('welcome') }}" class="btn btn-ghost">← Voltar</a>
+    </div>
+
+    <div class="header container">
+      <div class="brand">
+        <div class="logo">EBD</div>
+        <div>
+          <div class="h1">Painel Administrativo</div>
+          <div class="small">Faça login para acessar</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container center">
+      <div class="card login-form" style="max-width: 400px; margin: 40px auto">
+        <h2>Login Admin</h2>
+
+        {% if error %}
+        <p style="color: var(--danger); font-weight: 600; margin-bottom: 12px">
+          {{ error }}
+        </p>
+        {% endif %}
+
+        <form method="POST">
+          <label>Usuário</label>
+          <input
+            type="text"
+            name="username"
+            placeholder="Digite seu usuário"
+            required
+          />
+
+          <label>Senha</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required
+          />
+
+          <button type="submit">Entrar</button>
+        </form>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

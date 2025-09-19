@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Admin</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Botão de voltar -->
+    <div style="margin: 20px 0; text-align: right">
+      <a href="{{ url_for('welcome') }}" class="btn btn-ghost">← Voltar</a>
+    </div>
+
+    <div class="container">
+      <h2>Painel Administrativo</h2>
+
+      <h3>Médias por professor</h3>
+      <table class="table">
+        <tr>
+          <th>Professor</th>
+          <th>Média</th>
+        </tr>
+        {% for m in medias %}
+        <tr>
+          <td>{{ m.nome }}</td>
+          <td>{{ "%.2f"|format(m.media or 0) }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <h3>Respostas detalhadas</h3>
+      <table class="table">
+        <tr>
+          <th>Aluno</th>
+          <th>Professor</th>
+          <th>Pergunta</th>
+          <th>Resposta</th>
+          <th>Sugestão</th>
+        </tr>
+        {% for r in respostas %}
+        <tr class="row-alt">
+          <td>{{ r.aluno_nome }}</td>
+          <td>{{ r.professor_nome }}</td>
+          <td>{{ r.pergunta }}</td>
+          <td>{{ r.resposta }}</td>
+          <td>{{ r.sugestao }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

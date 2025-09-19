@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Obrigado!</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card center">
+        <h2>Obrigado por sua participação!</h2>
+        <p class="small">Sua avaliação foi registrada com sucesso.</p>
+        <a class="btn btn-primary" href="{{ url_for('welcome') }}"
+          >Voltar à Página Inicial</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

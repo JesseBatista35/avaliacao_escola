@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avaliação EBD</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="header container">
+      <div class="brand">
+        <div class="logo">EBD</div>
+        <div>
+          <div class="h1">Avaliação da Escola Bíblica Adesam 113</div>
+          <div class="small">Bem-vindo(a)!</div>
+        </div>
+      </div>
+      <div class="nav">
+        <a class="badge" href="{{ url_for('quiz') }}">Responder Quiz</a>
+        <a class="badge" href="{{ url_for('login') }}">Área do Admin</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="card center">
+        <h2>Seja bem-vindo(a)!</h2>
+        <p class="small">
+          Sua opinião é muito importante para melhorarmos a Dinâmica da Escola
+          Bíblica Dominical.
+        </p>
+        <a class="btn btn-primary" href="{{ url_for('quiz') }}"
+          >Começar Avaliação</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

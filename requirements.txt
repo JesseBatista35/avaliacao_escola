@@ -1,2 +1,4 @@
 Flask
 pymysql
+gunicorn
+psycopg2-binary
